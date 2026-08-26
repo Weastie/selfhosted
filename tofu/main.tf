@@ -1,4 +1,11 @@
 terraform {
+
+  backend "s3" {
+    bucket = "terraform-state-087886048731-us-east-1-an"
+    key    = "tofu"
+    region = "us-east-1"
+  }
+
   required_providers {
     aws = {
       source = "opentofu/aws"
