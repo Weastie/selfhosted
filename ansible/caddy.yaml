@@ -1,0 +1,6 @@
+- name: Caddy
+  hosts: caddy
+  vars_files:
+    - vars/secrets.yaml
+  roles:
+    - caddy

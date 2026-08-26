@@ -1,0 +1,7 @@
+---
+# handlers file for debianvm
+- name: Restart borgmatic
+  ansible.builtin.service:
+    name: borgmatic.timer
+    state: restarted
+  become: true

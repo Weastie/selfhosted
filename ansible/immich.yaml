@@ -1,0 +1,6 @@
+- name: Immich
+  hosts: debianvm
+  vars_files:
+    - vars/secrets.yaml
+  roles:
+    - immich

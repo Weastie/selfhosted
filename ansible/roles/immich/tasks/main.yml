@@ -1,0 +1,26 @@
+---
+# tasks file for immich
+- name: Create data mount directory
+  ansible.builtin.file:
+    path: /data/immich
+    state: directory
+- name: Create immich directory
+  ansible.builtin.file:
+    path: ~/immich
+    state: directory
+- name: Set immich env
+  ansible.builtin.template:
+    src: templates/env
+    dest: ~/immich/.env
+  notify:
+    - Restart immich
+- name: Set immich docker-compose.yaml
+  ansible.builtin.template:
+    src: files/docker-compose.yaml
+    dest: ~/immich/docker-compose.yaml
+  notify:
+    - Restart immich
+- name: Start docker compose
+  community.docker.docker_compose_v2:
+    project_src: ~/immich
+    state: present

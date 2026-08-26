@@ -1,0 +1,5 @@
+---
+# Full infrastructure
+- import_playbook: debianvm.yaml
+# - import_playbook: immich.yaml
+- import_playbook: caddy.yaml

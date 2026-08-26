@@ -1,0 +1,74 @@
+---
+# tasks file for debianvm
+- name: Install packages
+  ansible.builtin.apt:
+    name:
+      - qemu-guest-agent
+      - rclone
+      - awscli
+      - restic
+    state: latest
+  become: true
+- name: Create data mount directory
+  ansible.builtin.file:
+    path: /data
+    state: directory
+  become: true
+- name: Mount data drive
+  ansible.posix.mount:
+    path: /data
+    state: mounted
+    src: /dev/sdb
+    fstype: ext4
+    opts: defaults
+  become: true
+- name: Make mount dir accessible
+  ansible.builtin.file:
+    path: /data
+    state: directory
+    mode: '777'
+  become: true
+- name: Install docker
+  ansible.builtin.apt:
+    name:
+      - docker.io
+      - docker-compose
+    state: latest
+  become: true
+- name: Add weastie to docker
+  ansible.builtin.user:
+    name: weastie
+    append: true
+    groups:
+      - docker
+  become: true
+- name: Create aws directory
+  ansible.builtin.file:
+    path: ~/.aws
+    state: directory
+- name: Create root aws directory
+  ansible.builtin.file:
+    path: ~/.aws
+    state: directory
+  become: true
+- name: Set aws credentials
+  ansible.builtin.template:
+    src: templates/aws-credentials
+    dest: ~/.aws/credentials
+- name: Set root aws credentials
+  ansible.builtin.template:
+    src: templates/aws-credentials
+    dest: ~/.aws/credentials
+  become: true
+- name: Set backup script
+  ansible.builtin.template:
+    src: templates/restic-backup.sh
+    dest: ~/restic-backup.sh
+    mode: 755
+  become: true
+- name: Set backup cron
+  ansible.builtin.template:
+    src: templates/restic-cron
+    dest: /etc/cron.d/restic-cron
+    mode: 755
+  become: true

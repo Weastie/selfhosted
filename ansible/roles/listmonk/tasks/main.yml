@@ -1,0 +1,26 @@
+---
+# tasks file 
+- name: Create data mount directory
+  ansible.builtin.file:
+    path: /data/listmonk
+    state: directory
+- name: Create listmonk directory
+  ansible.builtin.file:
+    path: ~/listmonk
+    state: directory
+- name: Set listmonk env
+  ansible.builtin.template:
+    src: templates/env
+    dest: ~/listmonk/.env
+  notify:
+    - Restart
+- name: Set docker-compose.yaml
+  ansible.builtin.template:
+    src: files/docker-compose.yaml
+    dest: ~/listmonk/docker-compose.yaml
+  notify:
+    - Restart
+- name: Start docker compose
+  community.docker.docker_compose_v2:
+    project_src: ~/listmonk
+    state: present

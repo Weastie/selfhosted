@@ -1,0 +1,36 @@
+---
+# tasks file for caddy
+- name: Install caddy, ddns
+  ansible.builtin.apt:
+    name:
+      - caddy
+      - ddclient
+    state: latest
+- name: Set ddclient.conf
+  ansible.builtin.template:
+    src: templates/ddclient.conf
+    dest: /etc/ddclient.conf
+  notify:
+    - Restart DDclient
+- name: Set Caddyfile
+  ansible.builtin.template:
+    src: templates/Caddyfile
+    dest: /etc/caddy/Caddyfile
+    owner: caddy
+    group: caddy
+  notify:
+    - Restart Caddy
+- name: Create /var/www folder
+  ansible.builtin.file:
+    path: /var/www
+    state: directory
+- name: copy static file server
+  ansible.builtin.copy:
+    src: files/weastiecom
+    dest: /var/www/
+    mode: o+r
+- name: copy static file server
+  ansible.builtin.copy:
+    src: files/soulhatch
+    dest: /var/www/
+    mode: o+r

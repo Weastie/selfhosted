@@ -1,0 +1,10 @@
+---
+# handlers file for caddy
+- name: Restart Caddy
+  ansible.builtin.service:
+    name: caddy
+    state: restarted
+- name: Restart DDclient
+  ansible.builtin.service:
+    name: ddclient
+    state: restarted

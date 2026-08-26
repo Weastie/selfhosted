@@ -1,0 +1,9 @@
+- name: Update
+  hosts: all
+  tasks:
+    - name: OS update
+      ansible.builtin.apt:
+        name: '*'
+        update_cache: yes
+        state: latest
+      become: true

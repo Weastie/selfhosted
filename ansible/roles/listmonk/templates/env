@@ -1,0 +1,4 @@
+# Empty
+POSTGRES_PASSWORD="{{ lookup('ansible.builtin.env', 'LISTMONK_DB_PASSWORD') }}"
+LISTMONK_ADMIN_PASSWORD="{{ lookup('ansible.builtin.env', 'LISTMONK_ADMIN_PASSWORD') }}"
+LISTMONK_ADMIN_USER="{{ lookup('ansible.builtin.env', 'LISTMONK_ADMIN_USER') }}"
