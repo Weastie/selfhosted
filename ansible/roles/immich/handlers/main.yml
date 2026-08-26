@@ -1,6 +1,0 @@
----
-# handlers file for immich
-- name: Restart immich
-  community.docker.docker_compose_v2:
-    project_src: ~/immich
-    state: restarted
