@@ -24,13 +24,3 @@
   ansible.builtin.file:
     path: /var/www
     state: directory
-- name: copy static file server
-  ansible.builtin.copy:
-    src: files/weastiecom
-    dest: /var/www/
-    mode: o+r
-- name: copy static file server
-  ansible.builtin.copy:
-    src: files/soulhatch
-    dest: /var/www/
-    mode: o+r

@@ -1,12 +1,3 @@
-weastie.com {
-  root * /var/www/weastiecom
-  file_server
-}
-
-immich.weastie.com {
-  reverse_proxy {{ hostvars[inventory_hostname]['groups']['debianvm'][0] }}:2283
-}
-
 soulhatch.band {
   root * /var/www/soulhatch
   file_server
