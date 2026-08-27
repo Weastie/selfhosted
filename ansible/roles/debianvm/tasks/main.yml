@@ -64,11 +64,11 @@
   ansible.builtin.template:
     src: templates/restic-backup.sh
     dest: ~/restic-backup.sh
-    mode: 755
+    mode: '0755'
   become: true
 - name: Set backup cron
   ansible.builtin.template:
     src: templates/restic-cron
     dest: /etc/cron.d/restic-cron
-    mode: 755
+    mode: '0644'
   become: true

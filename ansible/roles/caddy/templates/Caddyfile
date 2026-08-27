@@ -1,8 +1,3 @@
-soulhatch.band {
-  root * /var/www/soulhatch
-  file_server
-}
-
 listmonk.soulhatch.band {
   reverse_proxy {{ hostvars[inventory_hostname]['groups']['debianvm'][0] }}:9000
 }
