@@ -25,3 +25,19 @@ resource "namecheap_domain_host_record" "github_pages_aaaa" {
   type     = "AAAA"
   address  = each.key
 }
+
+resource "namecheap_domain_host_record" "github_pages_www_a" {
+  for_each = toset(local.gh_pages_a_records)
+  domain   = "soulhatch.band"
+  hostname = "www"
+  type     = "A"
+  address  = each.key
+}
+
+resource "namecheap_domain_host_record" "github_pages_www_aaaa" {
+  for_each = toset(local.gh_pages_aaaa_records)
+  domain   = "soulhatch.band"
+  hostname = "www"
+  type     = "AAAA"
+  address  = each.key
+}
